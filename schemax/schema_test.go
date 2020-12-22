@@ -12,12 +12,16 @@ type SchemaDemoInner struct {
 }
 
 type SchemaDemo struct {
-	Name        string                       `json:"name"`
-	Tags        []string                     `json:"tags"`
-	Have        map[string]int32             `json:"have"`
-	Inner       SchemaDemoInner              `json:"inner"`
-	Fields      map[string][]string          `json:"fields"`
-	FieldInners map[string][]SchemaDemoInner `json:"field_inners"`
+	Name          string                       `json:"name"`
+	Tags          []string                     `json:"tags"`
+	Have          map[string]int32             `json:"have"`
+	Inner         SchemaDemoInner              `json:"inner"`
+	Fields        map[string][]string          `json:"fields"`
+	FieldInners   map[string][]SchemaDemoInner `json:"field_inners"`
+	Interface     interface{}                  `json:"interface"`
+	Interfaces    []interface{}                `json:"interfaces"`
+	InterfaceMap  map[string]interface{}       `json:"interface_map"`
+	InterfaceMap2 map[interface{}]interface{}  `json:"interface_map_2"`
 }
 
 func TestMakeSchema(t *testing.T) {

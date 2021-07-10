@@ -24,3 +24,9 @@ func NewError(code int, err error) *Error {
 		message: err.Error(),
 	}
 }
+
+func CreateErrorFuncHandler(code int) func(error) error {
+	return func(err error) error {
+		return NewError(code, err)
+	}
+}

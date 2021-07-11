@@ -1,9 +1,10 @@
 package httpx
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/goools/tools/errorx"
-	"net/http"
 )
 
 func SetRespErr(c *gin.Context, err error) {
@@ -26,6 +27,10 @@ func SetRespJSON(c *gin.Context, data interface{}, message string) {
 	})
 }
 
+func SetDefaultRespJSON(c *gin.Context, data interface{}) {
+	SetRespJSON(c, data, "success")
+}
+
 func SetRespJSONPaged(c *gin.Context, data interface{}, message string, total int64) {
 	if message == "" {
 		message = "success"
@@ -36,4 +41,8 @@ func SetRespJSONPaged(c *gin.Context, data interface{}, message string, total in
 		Data:    data,
 		Total:   total,
 	})
+}
+
+func SetDefaultRespJSONPaged(c *gin.Context, data interface{}, total int64) {
+	SetRespJSONPaged(c, data, "success", total)
 }

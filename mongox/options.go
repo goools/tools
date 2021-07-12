@@ -1,6 +1,10 @@
 package mongox
 
-import "go.mongodb.org/mongo-driver/mongo/options"
+import (
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo/options"
+)
 
 func MakeFindPageOpt(opt *options.FindOptions, pageIndex, pageSize int64) *options.FindOptions {
 	if opt == nil {
@@ -39,4 +43,11 @@ func MakeReturnAfter(opt *options.FindOneAndUpdateOptions) *options.FindOneAndUp
 	}
 	opt.SetReturnDocument(options.After)
 	return opt
+}
+
+func MakeRegexFilter(fieldName, queryStr string) bson.E {
+	return bson.E{
+		Key:   fieldName,
+		Value: bson.D{{Key: "$regex", Value: primitive.Regex{Pattern: queryStr, Options: "i"}}},
+	}
 }

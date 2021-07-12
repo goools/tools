@@ -1,6 +1,8 @@
 package mongox
 
 import (
+	"strings"
+
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -28,6 +30,7 @@ func MakeSortedFieldOpt(opt *options.FindOptions, sortedField string) *options.F
 	if opt == nil {
 		opt = options.Find()
 	}
+	sortedField = strings.Trim(sortedField, " ")
 	if sortedField == "" {
 		sortedField = "-_id"
 	}

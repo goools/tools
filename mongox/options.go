@@ -12,11 +12,8 @@ func MakeFindPageOpt(opt *options.FindOptions, pageIndex, pageSize int64) *optio
 	if opt == nil {
 		opt = options.Find()
 	}
-	if pageIndex < 1 {
-		pageIndex = 1
-	}
-	if pageSize < 10 {
-		pageSize = 10
+	if pageIndex <= 0 || pageSize <= 0 {
+		return opt
 	}
 	opt.SetLimit(pageSize)
 	if pageIndex > 1 {
